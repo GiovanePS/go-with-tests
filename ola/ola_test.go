@@ -29,4 +29,11 @@ func TestOla(t *testing.T) {
 
 		verificaMensagemCorreta(t, output, expected)
 	})
+
+	t.Run("em francês", func(t *testing.T) {
+		output := Ola("Madame", "frances")
+		expected := "Bonjour, Madame!"
+
+		verificaMensagemCorreta(t, output, expected)
+	})
 }

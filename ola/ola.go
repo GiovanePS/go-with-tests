@@ -2,6 +2,7 @@ package main
 
 const prefixoOlaPortugues = "Olá, "
 const prefixoOlaEspanhol = "Hola, "
+const prefixoOlaFrances = "Bonjour, "
 const sufixoExclamacao = "!"
 
 func Ola(nome string, idioma string) string {
@@ -9,9 +10,12 @@ func Ola(nome string, idioma string) string {
 		nome = "mundo"
 	}
 
-	if idioma == "espanhol" {
+	switch idioma {
+	case "espanhol":
 		return prefixoOlaEspanhol + nome + sufixoExclamacao
+	case "frances":
+		return prefixoOlaFrances + nome + sufixoExclamacao
+	default:
+		return prefixoOlaPortugues + nome + sufixoExclamacao
 	}
-
-	return prefixoOlaPortugues + nome + sufixoExclamacao
 }
