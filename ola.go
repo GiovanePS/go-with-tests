@@ -1,13 +1,17 @@
 package main
 
-import "fmt"
+const prefixoOlaPortugues = "Olá, "
+const prefixoOlaEspanhol = "Hola, "
+const sufixoExclamacao = "!"
 
-const prefixoOla = "Olá, "
-
-func Ola(s string) string {
-	if s == "" {
-		s = "mundo"
+func Ola(nome string, idioma string) string {
+	if nome == "" {
+		nome = "mundo"
 	}
 
-	return fmt.Sprintf("%s%s!", prefixoOla, s)
+	if idioma == "espanhol" {
+		return prefixoOlaEspanhol + nome + sufixoExclamacao
+	}
+
+	return prefixoOlaPortugues + nome + sufixoExclamacao
 }
