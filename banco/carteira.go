@@ -1,6 +1,9 @@
 package banco
 
-import "fmt"
+import (
+	"errors"
+	"fmt"
+)
 
 type Bitcoin float64
 
@@ -14,6 +17,15 @@ func (b Bitcoin) String() string {
 
 func (c *Carteira) Depositar(valor Bitcoin) {
 	c.saldo += valor
+}
+
+func (c *Carteira) Sacar(valor Bitcoin) error {
+	if valor > c.saldo {
+		return errors.New("Eita")
+	}
+
+	c.saldo -= valor
+	return nil
 }
 
 func (c Carteira) Saldo() Bitcoin {
