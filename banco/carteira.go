@@ -19,9 +19,11 @@ func (c *Carteira) Depositar(valor Bitcoin) {
 	c.saldo += valor
 }
 
+var ErroSaldoInsuficiente = errors.New("não é possível retirar: saldo insuficiente")
+
 func (c *Carteira) Sacar(valor Bitcoin) error {
 	if valor > c.saldo {
-		return errors.New("Eita")
+		return ErroSaldoInsuficiente
 	}
 
 	c.saldo -= valor

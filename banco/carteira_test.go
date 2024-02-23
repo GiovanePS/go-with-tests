@@ -5,15 +5,6 @@ import (
 )
 
 func TestCarteira(t *testing.T) {
-	verifyBalance := func(t *testing.T, carteira Carteira, expected Bitcoin) {
-		t.Helper()
-
-		output := carteira.Saldo()
-
-		if output != expected {
-			t.Errorf("output %v, expected %v", output, expected)
-		}
-	}
 	t.Run("Depositar bitcoin", func(t *testing.T) {
 		carteira := Carteira{}
 		carteira.Depositar(Bitcoin(10.0))
@@ -25,11 +16,12 @@ func TestCarteira(t *testing.T) {
 
 	t.Run("Sacar bitcoin", func(t *testing.T) {
 		carteira := Carteira{Bitcoin(100)}
-		carteira.Sacar(Bitcoin(50))
+		err := carteira.Sacar(Bitcoin(50))
 
 		expected := Bitcoin(50.0)
 
 		verifyBalance(t, carteira, expected)
+		verifyNoError(t, err)
 	})
 
 	t.Run("Sacar com saldo insuficiente", func(t *testing.T) {
@@ -38,9 +30,38 @@ func TestCarteira(t *testing.T) {
 		expected := Bitcoin(10)
 
 		verifyBalance(t, carteira, expected)
-
-		if err != nil {
-			t.Error("Expected error, but none occured")
-		}
+		verifyError(t, err, ErroSaldoInsuficiente.Error())
 	})
+}
+
+func verifyBalance(t *testing.T, carteira Carteira, expected Bitcoin) {
+	t.Helper()
+
+	output := carteira.Saldo()
+
+	if output != expected {
+		t.Errorf("output %v, expected %v", output, expected)
+	}
+}
+
+func verifyError(t *testing.T, err error, expected string) {
+	t.Helper()
+
+	if err == nil {
+		t.Fatal("Expected error, but none occured")
+	}
+
+	output := err.Error()
+
+	if output != expected {
+		t.Errorf("Output %s, expected %s", output, expected)
+	}
+}
+
+func verifyNoError(t *testing.T, err error) {
+	t.Helper()
+
+	if err != nil {
+		t.Fatal("Unexpected error occured.")
+	}
 }
