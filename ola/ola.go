@@ -1,4 +1,4 @@
-package main
+package ola
 
 const prefixoOlaPortugues = "Olá, "
 const prefixoOlaEspanhol = "Hola, "
