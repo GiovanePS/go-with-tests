@@ -32,10 +32,6 @@ type SleeperSpy struct{ Chamadas int }
 
 func (s *SleeperSpy) Sleep() { s.Chamadas++ }
 
-type SleeperStandard struct{}
-
-func (s *SleeperStandard) Sleep() { time.Sleep(1 * time.Second) }
-
 type SpyContagemOperations struct{ Chamadas []string }
 
 func (s *SpyContagemOperations) Sleep() { s.Chamadas = append(s.Chamadas, pausa) }
