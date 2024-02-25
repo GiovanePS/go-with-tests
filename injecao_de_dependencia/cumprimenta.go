@@ -1,4 +1,4 @@
-package main
+package injecao
 
 import (
 	"fmt"
@@ -14,7 +14,7 @@ func HandlerMeuCumprimento(w http.ResponseWriter, r *http.Request) {
 	Cumprimenta(w, "Mundo")
 }
 
-func main() {
+func Init() {
 	err := http.ListenAndServe(":5000", http.HandlerFunc(HandlerMeuCumprimento))
 
 	if err != nil {
