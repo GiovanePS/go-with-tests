@@ -6,10 +6,10 @@ import (
 	"time"
 )
 
-var limit10Seconds = 10 * time.Second
+var Secondslimit10 = 10 * time.Second
 
 func Corredor(url1 string, url2 string) (string, error) {
-	return Configurable(url1, url2, limit10Seconds)
+	return Configurable(url1, url2, Secondslimit10)
 }
 
 func Configurable(url1 string, url2 string, limitTime time.Duration) (fastest string, erro error) {
